@@ -8,7 +8,6 @@ __Hardware__
 <img width="1482" height="692" alt="Image" src="https://github.com/user-attachments/assets/cd2c3806-2af7-4068-9006-2583d6b2bc9c" />
 Using an Arduino Uno R3, a 220ohm Resistor, an LED, and a breadboard.
 
-__Software__
-
+__Software__ </>
 C++ and Arduino Library for making the LED Blink
 Python for User Interface
