@@ -9,5 +9,5 @@ __Hardware__
 Using an Arduino Uno R3, a 220ohm Resistor, an LED, and a breadboard.
 
 __Software__  
-C++ and Arduino Library for making the LED Blink
+C++ and Arduino Library for making the LED Blink  
 Python for User Interface
