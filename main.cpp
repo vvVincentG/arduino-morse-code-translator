@@ -1,27 +1,52 @@
 #include <Arduino.h>
+
 #define pin13 13
 
-// put function declarations here:
-int myFunction(int, int);
+// initiate function here:
+void dot();
+void dash();
 
+
+
+// board code:
 void setup() 
 {
   // put your setup code here, to run once:
   pinMode(pin13, OUTPUT);
-
 }
 
 void loop() 
 {
   // put your main code here, to run repeatedly:
-  digitalWrite(pin13, LOW);
-  delay(1000);
+  
+  dot();
+  dot();
+  dot();//S
+
+  dash();
+  dash();
+  dash();//O
+
+  dot();
+  dot();
+  dot();//S
+  
+}
+
+// define function here:
+void dot()
+{
   digitalWrite(pin13, HIGH);
-  delay(1000);  
-
+  delay(250); //I'm letting 250ms be the 1 timing
+  digitalWrite(pin13, LOW);
+  delay(250); 
 }
 
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+void dash()
+{
+  digitalWrite(pin13, HIGH);
+  delay(750); //dashes lash 3x a dot
+  digitalWrite(pin13, LOW);
+  delay(250); 
 }
+
