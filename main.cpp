@@ -50,10 +50,8 @@ void setup()
 void loop() 
 {
   // put your main code here, to run repeatedly:
-  Serial.begin(9600);
-  translateMorse("SOS");
-
-  letterGap();
+  //Serial.begin(9600); //debugging (is it one or 2 g?)
+  translateMorse("hi sos"); //STRING CANNOT HAVE ANY CHARACTERS ONLY LETTERS AND SPACE or else everything breaks :sob:
 
 }
 
@@ -79,7 +77,6 @@ void letterGap()
   //3 timings between each letter of a word but we already have one timing at the end of a dot/dash 
   //so add 2 timings, 250 + (2*250) or 250 + 500
   delay(500); 
-  Serial.println("@");
 }
 
 void wordGap()
@@ -95,36 +92,46 @@ void translateMorse(String sentence)
   sentence.toUpperCase();
 
   //For loop to break the string apart into its individual letters
-
   for (size_t i = 0; i < sentence.length(); i++)
   {
     char letter = sentence[i];
 
-    //C++ reads 'A' as 1 and the rest of the letters of the alphabet as numbers, as long as the letter is uppercase and in ' '
-    //ex: 'A'=1, 'B'=2, 'C'=3,...,'Z'=26
-    //So we can take advantage of it and use it for the alphabet list
-    //Alphabet['Letter' - 'A'] = Letter's Morse code 
-    //ex: 'Letter' = 'A', Alphabet['A' - 'A'] --> Alphabet[1 - 1] --> Alphabet[0] = ".-"(Morse code for A)
-    String morseCode = alphabet[letter - 'A'];
-
-    //Run another For Loop to read each individual dot/dash and play its function
-
-    for (size_t j = 0; j < morseCode.length(); j++)
+    //Checks if theres a space
+    if (letter == ' ')
     {
-      //checks if that character is a dot .
-      Serial.println(morseCode[j]);
-      if (morseCode[j] == '.')
+      wordGap();
+    }
+    else 
+    {
+      //C++ reads 'A' as 1 and the rest of the letters of the alphabet as numbers, as long as the letter is uppercase and in ' '
+      //ex: 'A'=1, 'B'=2, 'C'=3,...,'Z'=26
+      //So we can take advantage of it and use it for the alphabet list
+      //Alphabet['Letter' - 'A'] = Letter's Morse code 
+      //ex: 'Letter' = 'A', Alphabet['A' - 'A'] --> Alphabet[1 - 1] --> Alphabet[0] = ".-"(Morse code for A)
+      String morseCode = alphabet[letter - 'A'];
+
+      //Run another For Loop to read each individual dot/dash and play its function
+      for (size_t j = 0; j < morseCode.length(); j++)
       {
-        dot();
+        //checks if that character is a dot .
+        Serial.println(morseCode[j]);
+        if (morseCode[j] == '.')
+        {
+          dot();
+        }
+        //checks if that character is a dash -
+        if (morseCode[j] == '-')
+        {
+          dash();
+        }
+        
       }
-      //checks if that character is a dash -
-      if (morseCode[j] == '-')
-      {
-        dash();
-      }
-      Serial.println("!");
+      letterGap();
+
     }
 
   }
+  //Once the for loop breaks that means the sentence is over, I'm setting a small break before it loops the message again
+  wordGap();
 
 }
